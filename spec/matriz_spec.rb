@@ -56,4 +56,13 @@ describe Matriz do
      end
    end
 
+   describe "# Comparacion maximo y minimo"
+     it " Maximo " do
+        @matriz1.max.should eq(4)
+     end
+     it " Minimo " do
+        @matriz1.min.should eq(1)
+     end
+   end
+
 end
