@@ -10,7 +10,10 @@ class Matriz
    def initialize()
    end
 
-   # Convertir la matriz dependiendo de si es Densa o Dispersa.
+   # Convertir el array a matriz Densa o Dispersa.
+   # Contamos el numero de ceros que tiene cada array, en el caso
+   # de que sea menor de 60% la matriz será Densa, en caso contrario será
+   # Dispersa.
    def tipo(m)
      @filas = m.length
      @columnas = m[0].length
@@ -54,6 +57,9 @@ class MatrizDensa < Matriz
     end
   end
 
+  # Si el array pasado a la clase Matriz tiene un numero de ceros menor que
+  # el porcentaje 60% es Densa por lo que entra en la clase MatrizDensa y 
+  # se crea una matriz con copia(other).
   def copia(other)
     @filas = other.length
     @columnas = other[0].length
@@ -70,9 +76,13 @@ end
 class MatrizDispersa < Matriz
   def initialize(filas, columnas)
     @filas, @columnas = filas, columnas
-    @Matriz = Has.new()
+    @Matriz = Hash.new()
   end
 
+  # Si el array pasado a la clase Matriz tiene un numero de ceros mayor que
+  # el porcentaje 60% es Dispersa por lo que entra en la clase 
+  # MatrizDispersa y se crea un hash con copia(other), en el que solo se 
+  # pondrán los valores distintos de cero.
   def copia(other)
     @filas = other.length
     @columnas = other[0].length
