@@ -8,11 +8,12 @@ describe Matriz do
       # Matrices enteras
       @matriz1 = matrizSuper.tipo([[1, 2], [3, 4]])
       @matriz2 = matrizSuper.tipo([[2, 3], [4, 5]])
-      @matriz3 = matrizSuper.tipo([[1, 1], [1, 1]])
+      # @matriz3 = matrizSuper.tipo([[1, 1], [1, 1]])
       @matrizComp = matrizSuper.tipo([[1, 2], [3, 4]])
 
       # Resultados
       @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
+      @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
 
  
     
@@ -45,6 +46,13 @@ describe Matriz do
      it " Dos matrices dispersas " do
      end
      it " Una matriz densa y una matriz dispersa " do
+     end
+   end
+
+   describe "# Multiplicacion " do
+     it " Dos matrices densas " do
+        mult = @matriz1 * @matriz2
+        mult.should == @mulDensa
      end
    end
 
