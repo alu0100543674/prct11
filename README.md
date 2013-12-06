@@ -2,6 +2,10 @@
 
 	Esta práctica consiste en utilizar las gemas y la herencia para crear matrices dispersas y densas. 
 
+	En esta sólo se creara la estructura de la gema, y en la prct10 ya se empezará a crear el código.
+
+	El diseño de la práctica se divide en tres clases. Una clase Matriz que es de la que heredan la clase Densa y la clase Dispersa.
+
 ## Installation
 
 Add this line to your application's Gemfile:
