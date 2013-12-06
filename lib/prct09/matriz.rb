@@ -31,9 +31,9 @@ class Matriz
        end
      end
      
-     porcentaje = (ceros % tamanio)
+     #porcentaje = (ceros % tamanio)
 
-     if (porcentaje < 0.6)
+     if (ceros % tamanio) < 0.6
         matrizRe = MatrizDensa.new(@filas, @columnas)
         matrizRe.copia(m)
      else
@@ -82,6 +82,21 @@ class MatrizDensa < Matriz
      suma
    end
   
+   # Comparar dos matrices
+   def ==(other)
+     iguales = true
+     for i in 0...@filas
+       for j in 0...@columnas
+         if (@matriz[i][j] != other.matriz[i][j])
+            iguales = false
+         end
+       end
+     end
+     iguales
+    end
+
+
+
 end
 
 class MatrizDispersa < Matriz
