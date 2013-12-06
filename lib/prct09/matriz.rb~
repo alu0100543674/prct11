@@ -95,7 +95,20 @@ class MatrizDensa < Matriz
      iguales
     end
 
-
+   # Multiplicacion de dos matrices
+   def *(other)
+     multiplicacion = MatrizDensa.new(@filas, @columnas)
+     for i in 0...@filas
+       for j in 0...@columnas
+          aux = 0
+          for k in 0...other.filas
+            aux += (@matriz[i][k] * other.matriz[k][j]) 
+          end
+          multiplicacion.matriz[i][j] = aux
+       end
+     end
+     multiplicacion
+   end
 
 end
 

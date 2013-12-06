@@ -49,4 +49,11 @@ describe Matriz do
      end
    end
 
+   describe "# Multiplicacion " do
+     it " Dos matrices densas " do
+        mult = @matriz1 * @matriz2
+        mult.should == @mulDensa
+     end
+   end
+
 end

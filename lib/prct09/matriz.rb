@@ -95,6 +95,7 @@ class MatrizDensa < Matriz
      iguales
     end
 
+   # Multiplicacion de dos matrices
    def *(other)
      multiplicacion = MatrizDensa.new(@filas, @columnas)
      for i in 0...@filas
@@ -109,6 +110,29 @@ class MatrizDensa < Matriz
      multiplicacion
    end
 
+   def max()
+     max = @matriz[0][0]
+     for i in 0...@filas
+       for j in 0...@columnas
+          if (@matriz[i][j] >= max)
+             max = @matriz[i][j]
+          end
+       end
+     end
+     max
+   end
+
+   def min()
+     min = @matriz[0][0]
+     for i in 0...@filas
+       for j in 0...@columnas
+          if (@matriz[i][j] <= max)
+             min = @matriz[i][j]
+          end
+       end
+     end
+     min
+   end 
 end
 
 class MatrizDispersa < Matriz
