@@ -22,6 +22,16 @@ describe Matriz do
      it " Numero de columnas " do
         @matriz1.columnas.should eq(2)
      end
-  end
+   end
+
+   describe "# Suma " do
+     it " Dos matrices densas " do
+       
+     end
+     it " Dos matrices dispersas " do
+     end
+     it " Una matriz densa y una matriz dispersa " do
+     end
+   end
 
 end

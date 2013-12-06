@@ -4,7 +4,7 @@ class Matriz
    include Enumerable
    include Comparable
         
-   attr_reader :filas, :columnas, :Matriz
+   attr_reader :filas, :columnas, :matriz
    
    # Constructor
    def initialize()
@@ -51,9 +51,9 @@ end
 class MatrizDensa < Matriz
   def initialize(filas, columnas)
     @filas, @columnas = filas, columnas
-    @Matriz = Array.new{Array.new()}
+    @matriz = Array.new{Array.new()}
     for i in 0...@filas
-       @Matriz[i] = Array.new()
+       @matriz[i] = Array.new()
     end
   end
 
@@ -66,17 +66,24 @@ class MatrizDensa < Matriz
   
     for i in 0...other.length
       for j in 0...other[i].length
-         @Matriz[i][j] = other[i][j]
+         @matriz[i][j] = other[i][j]
       end
     end
   end
+
+  # Suma de matrices
+  def +(other)
+    suma = MatrizDensa.new(@filas, @columnas)
+    for i in 0...@filas
+       for j in 0...@columnas
+          suma.matriz
   
 end
 
 class MatrizDispersa < Matriz
   def initialize(filas, columnas)
     @filas, @columnas = filas, columnas
-    @Matriz = Has.new()
+    @matriz = Hash.new()
   end
 
   # Si el array pasado a la clase Matriz tiene un numero de ceros mayor que
@@ -90,7 +97,7 @@ class MatrizDispersa < Matriz
     for i in 0...other.length
       for j in 0...other[i].length
          if (other[i][j] != 0)
-             @Matriz["#{i},#{j}"] = other[i][j].to_i
+             @matriz["#{i},#{j}"] = other[i][j].to_i
          end
       end
     end
