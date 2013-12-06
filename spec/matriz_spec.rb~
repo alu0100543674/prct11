@@ -10,6 +10,19 @@ describe Matriz do
       @matriz2 = matrizSuper.tipo([[2, 3], [4, 5]])
       @matriz3 = matrizSuper.tipo([[1, 1], [1, 1]])
      
+      # Matrices fraccionarias
+      @matrizFrac1 = matrizSuper.tipo([[Fraccion.new(1, 2), Fraccion.new(0, 1)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]])
+      
       
    end
+
+   describe "# Matriz Densa " do
+     it " Numero de filas " do
+        @matriz1.filas.should eq(2)
+     end
+     it " Numero de columnas " do
+        @matriz1.columnas.should eq(2)
+     end
+  end
+
 end
