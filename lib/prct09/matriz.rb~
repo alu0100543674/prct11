@@ -95,6 +95,8 @@ class MatrizDensa < Matriz
      iguales
     end
 
+
+
 end
 
 class MatrizDispersa < Matriz
