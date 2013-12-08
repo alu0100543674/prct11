@@ -202,7 +202,7 @@ class MatrizDispersa < Matriz
     		for j in (0...other.columnas)
          	aux = 0
          	for k in (0...other.filas)
-         	   valueA, valueB = 0, 0
+         	   #valorM1, valorM2 = 0, 0
                if (@_Matriz.include?("#{i},#{j}")) and (other._Matriz.include?("#{i},#{j}"))
           	     aux += (@_Matriz["#{i},#{j}"] * other._Matriz["#{i},#{j}"])
           		else
