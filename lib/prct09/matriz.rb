@@ -133,6 +133,12 @@ class MatrizDensa < Matriz
      end
      min
    end 
+
+   # Se podría hacer hallando el determinante de una matriz pero
+   # usamos el maximo para comparar con <, >, =.
+   def <=>(other)
+     max <=> other.max
+   end
 end
 
 class MatrizDispersa < Matriz
