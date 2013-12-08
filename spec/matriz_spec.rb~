@@ -59,4 +59,14 @@ describe Matriz do
         mult.should == @mulDensa
      end
    end
+
+   describe "# Comparador " do
+     it " Menor, < " do
+        (@matriz1 < @matriz2).should eq(true)
+     end
+     it " Mayor, > " do
+        (@matriz1 > @matriz2).should eq(false)
+     end
+   
+   end
 end
