@@ -174,28 +174,44 @@ class MatrizDispersa < Matriz
     end
   end
 
-  # Suma
-  def +(other)
-     suma = MatrizDispersa.new(@filas, @columnas)
-     for i in 0...@filas
-        for j in 0...@columnas
-           valorM1 = 0
-           if (@_Matriz.include?("#{i}, #{j}"))
-              valorM1 = @_Matriz["#{i}, #{j}"]
-           end
-   
-           valorM2 = 0
-           if (@_Matriz.include?("#{i}, #{j}"))
-              valorM2 = @_Matriz["#{i}, #{j}"]
-           end
+  	# Suma
+	def +(other)
+		sum1 = MatrizDispersa.new(@filas, @columnas)
+	   for i in 0...@filas
+	      for j in 0...@columnas
+	         valueA = 0
+            if (@_Matriz.include?("#{i},#{j}"))
+	            valueA = @_Matriz["#{i},#{j}"]
+            end
   
-           suma._Matriz["#{i}, #{j}"] = (valorM1 + valorM2)
-         end
-      end
-      suma
-   end
-              
+             valueB = 0
+             if (other._Matriz.include?("#{i},#{j}"))
+	             valueB = other._Matriz["#{i},#{j}"]
+             end
 
+             sum1._Matriz["#{i},#{j}"] = (valueA + valueB)
+			end                        
+    	end
+      sum1
+	end
+       
 
-
+	def *(other)
+   	mult = MatrizDispersa.new(@filas, @columnas)        
+   	for i in (0...@filas)
+    		for j in (0...other.columnas)
+         	aux = 0
+         	for k in (0...other.filas)
+         	   valueA, valueB = 0, 0
+               if (@_Matriz.include?("#{i},#{j}")) and (other._Matriz.include?("#{i},#{j}"))
+          	     aux += (@_Matriz["#{i},#{j}"] * other._Matriz["#{i},#{j}"])
+          		else
+                 aux += 0
+   	         end                
+            end #for
+		      mult._Matriz["#{i},#{j}"] = aux
+	      end #for j
+		end #for i
+      mult
+	end       
 end
