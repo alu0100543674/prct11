@@ -110,6 +110,10 @@ class MatrizDensa < Matriz
      multiplicacion
    end
 
+   # Metodos para calcular el elemento maximo y minimo de una matriz
+   # Fijamos el elemento en la posicion (0,0) como maximo para ir 
+   # comparando el resto. En el caso de que los elemento sean mayor que 
+   # elemento max en (0,0)
    def max()
      max = @matriz[0][0]
      for i in 0...@filas
@@ -122,6 +126,10 @@ class MatrizDensa < Matriz
      max
    end
 
+
+   # Metodos para calcular el elemento maximo y minimo de una matriz
+   # Fijamos el elemento en la posicion (0,0) como maximo para ir 
+   # comparando el resto.
    def min()
      min = @matriz[0][0]
      for i in 0...@filas
@@ -134,6 +142,8 @@ class MatrizDensa < Matriz
      min
    end 
 
+   # Se podría hacer hallando el determinante de una matriz pero
+   # usamos el maximo para comparar con <, >, =.
    def <=>(other)
      max <=> other.max
    end
