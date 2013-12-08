@@ -22,7 +22,7 @@ describe MatrizDispersa do
    # Matrices Dispersas
    
 
-  	describe "# Dispersa: Numero filas y columnas " do
+  	describe "# Numero filas y columnas " do
    	it " Filas " do
    	   @matriz3.filas.should eq(2)
    	end
@@ -41,7 +41,17 @@ describe MatrizDispersa do
 			mult = @matriz3 * @matriz4
 			mult.to_s.should eq("8 0 \n0 0 \n")
 		end
+    
+      it " Maximo " do
+			@matriz3.max.should eq(1)
+      end
+  
+      it " Minimo " do
+			@matriz4.min.should eq(0)
+     end
 	end
+
+
 
 	describe "# Comprobando que la matriz no esta vacia" do
    	it "La matriz debe contener datos" do

@@ -218,9 +218,9 @@ class MatrizDispersa < Matriz
                 for i in 0...@filas
                         for j in 0...other.columnas                        
                         	aux = 0
-                           for k in (0...other.filas)
+                           for k in 0...other.filas
                                 
-                                        valueA, valueB = 0, 0
+                                        #valueA, valueB = 0, 0
                                         if (@matriz.include?("#{i},#{j}")) and (other.matriz.include?("#{i},#{j}"))
                                                 aux += (@matriz["#{i},#{j}"] * other.matriz["#{i},#{j}"])
                                         else
@@ -250,6 +250,43 @@ class MatrizDispersa < Matriz
                 iguales
         end
 
+	def max()
+ 	  if (@matriz.include?("0,0")) #max = al primer elemento del hash
+        max = @matriz["0,0"]
+     else
+        max = 0
+     end
+  
+     for i in (0...@filas)
+        for j in (0...@columnas)
+           if ((@matriz.include?("#{i},#{j}")) && (@matriz["#{i},#{j}"] >= max))
+              max = @matriz["#{i},#{j}"]
+           end #if
+        end #for j
+     end #for i
+     max
+	end
+
+   def min()
+   	if (@matriz.include?("0,0")) #min = al primer elemento del hash
+         min = @matriz["0,0"]
+      else
+         min = 0
+      end
+    
+      for i in (0...@filas)
+         for j in (0...@columnas)
+            if (@matriz.include?("#{i},#{j}"))
+               if (@matriz["#{i},#{j}"] <= min)
+                  min = @matriz["#{i},#{j}"]
+               end
+            else #Si el minimo no tiene en cuenta el 0 quitar el else
+               min = 0
+         	end #if
+      	end #for j
+      end #for i
+   	min
+	end
 
   
 end

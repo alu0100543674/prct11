@@ -13,7 +13,7 @@ describe MatrizDispersa do
 
       # Resultados
       @sumDispersa = matrizSuper.tipo([[3, 0], [0, 0]])
-		@multDispersa = matrizSuper.tipo([[4, 0], [0, 0]])
+		#@multDispersa = matrizSuper.tipo([[4, 0], [0, 0]])
       @matrizComp = matrizSuper.tipo([[1, 0], [0, 0]])
 		
       
@@ -22,7 +22,7 @@ describe MatrizDispersa do
    # Matrices Dispersas
    
 
-  	describe "# Dispersa: Numero filas y columnas " do
+  	describe "# Numero filas y columnas " do
    	it " Filas " do
    	   @matriz3.filas.should eq(2)
    	end
@@ -39,9 +39,19 @@ describe MatrizDispersa do
    
 		it " Multiplicacion " do
 			mult = @matriz3 * @matriz4
-			mult.to_s.should eq(@multDispersa.to_s)
+			mult.to_s.should eq("8 0 \n0 0 \n")
 		end
+    
+      it " Maximo " do
+			@matriz3.max.should eq(1)
+      end
+  
+      it " Minimo " do
+			@matriz4.min.should eq(4)
+     end
 	end
+
+
 
 	describe "# Comprobando que la matriz no esta vacia" do
    	it "La matriz debe contener datos" do
