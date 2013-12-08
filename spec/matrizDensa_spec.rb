@@ -1,6 +1,6 @@
 require "./lib/prct09/matriz.rb"
 
-describe Matriz do
+describe MatrizDensa do
 	before :each do
 		# Creamos una matriz llamada matrizSuper de tipo Matriz.
       matrizSuper = Matriz.new();
@@ -11,15 +11,12 @@ describe Matriz do
       @matriz2 = matrizSuper.tipo([[2, 3], [4, 5]])
       @matrizComp = matrizSuper.tipo([[1, 2], [3, 4]])
 
-      # Dispersas
-      @matriz3 = matrizSuper.tipo([[1, 0], [0, 0]])
-      @matriz4 = matrizSuper.tipo([[2, 0], [0, 0]])
-      
+     
 
       # Resultados
       @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
       @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
-      @sumDispersa = matrizSuper.tipo([[3, 0], [0, 0]])
+      
       
    end
 
@@ -71,21 +68,4 @@ describe Matriz do
       end
    end
 
-
-   # Matrices Dispersas
-   describe "# Dispersa: Numero filas y columnas " do
-   	it " Filas " do
-   	   @matriz3.filas.should eq(2)
-   	end
-      it " Columnas " do
-      	@matriz3.columnas.should eq(2)
-      end
-   end
-
-   describe "# Dispersa: Suma" do
-   	it " Suma" do 
-      	sum = @matriz3 + @matriz4
-         sum.should == @sumDispersa
-      end
-   end
 end
