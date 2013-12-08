@@ -1,6 +1,6 @@
 require "./lib/prct09/matriz.rb"
 
-describe Matriz do
+describe MatrizDensa do
 	before :each do
 		# Creamos una matriz llamada matrizSuper de tipo Matriz.
       matrizSuper = Matriz.new();
