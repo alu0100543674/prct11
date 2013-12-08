@@ -173,4 +173,29 @@ class MatrizDispersa < Matriz
       end
     end
   end
+
+  # Suma
+  def +(other)
+     suma = MatrizDispersa.new(@filas, @columnas)
+     for i in 0...@filas
+        for j in 0...@columnas
+           valorM1 = 0
+           if (@_Matriz.include?("#{i}, #{j}"))
+              valorM1 = @_Matriz["#{i}, #{j}"]
+           end
+   
+           valorM2 = 0
+           if (@_Matriz.include?("#{i}, #{j}"))
+              valorM2 = @_Matriz["#{i}, #{j}"]
+           end
+  
+           suma._Matriz["#{i}, #{j}"] = (valorM1 + valorM2)
+         end
+      end
+      suma
+   end
+              
+
+
+
 end
