@@ -14,11 +14,6 @@ describe Matriz do
       # Resultados
       @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
       @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
-
- 
-    
-     
-
       
       
    end
@@ -49,20 +44,19 @@ describe Matriz do
      end
    end
 
+   describe "# Maximo y minimo elemento" do
+     it "Maximo" do
+       @matriz1.max.should eq(4)
+     end
+     it "Minimo" do
+       @matriz1.min.should eq(1)
+     end
+   end
+
    describe "# Multiplicacion " do
      it " Dos matrices densas " do
         mult = @matriz1 * @matriz2
         mult.should == @mulDensa
      end
    end
-
-   describe "# Comparacion maximo y minimo"
-     it " Maximo " do
-        @matriz1.max.should eq(4)
-     end
-     it " Minimo " do
-        @matriz1.min.should eq(1)
-     end
-   end
-
 end

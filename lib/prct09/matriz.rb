@@ -126,7 +126,7 @@ class MatrizDensa < Matriz
      min = @matriz[0][0]
      for i in 0...@filas
        for j in 0...@columnas
-          if (@matriz[i][j] <= max)
+          if (@matriz[i][j] <= min)
              min = @matriz[i][j]
           end
        end
