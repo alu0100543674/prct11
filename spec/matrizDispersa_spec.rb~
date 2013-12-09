@@ -9,6 +9,7 @@ describe MatrizDispersa do
       # Dispersas
       @matriz3 = matrizSuper.tipo([[1, 0], [0, 0]])
       @matriz4 = matrizSuper.tipo([[4, 0], [0, 0]])
+ 		@matriz5 = matrizSuper.tipo([[3, 0], [0, 0]])
       
 
       # Resultados
@@ -32,9 +33,14 @@ describe MatrizDispersa do
    end
 
    describe "# Operaciones " do
-	   it "Se deben poder sumar dos matrices" do
+	   it " Suma " do
          sum = (@matriz3 + @matriz4)
          sum.to_s.should eq("5 0 \n0 0 \n")
+      end
+
+		it " Resta " do
+         sum = (@matriz4 - @matriz5)
+         sum.to_s.should eq("1 0 \n0 0 \n")
       end
    
 		it " Multiplicacion " do
@@ -47,17 +53,28 @@ describe MatrizDispersa do
       end
   
       it " Minimo " do
-			@matriz4.min.should eq(4)
-     end
+			@matriz4.min.should eq(0)
+      end
+
+		it "La matriz debe contener datos" do
+    	  @matriz3.should == @matrizComp
+      end
 	end
 
 
 
-	describe "# Comprobando que la matriz no esta vacia" do
-   	it "La matriz debe contener datos" do
-    	  @matriz3.should == @matrizComp
-      end
+	
+
+	describe "# Comparador <=> " do
+		it " < " do
+		(@matriz3 < @matriz4).should eq(true)	
+		end
+		it " > " do
+		(@matriz3 > @matriz4).should eq(false)
+		end
    end
+
+
 
 	
 

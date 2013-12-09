@@ -81,6 +81,17 @@ class MatrizDensa < Matriz
      end
      suma
    end
+
+	# Resta de matrices
+  	def -(other)
+   	suma = MatrizDensa.new(@filas, @columnas)
+  		for i in 0...@filas
+      	for j in 0...@columnas
+      		suma.matriz[i][j] = (@matriz[i][j] - other.matriz[i][j])
+   	   end
+   	end
+  		suma
+   end
   
    # Comparar dos matrices
    def ==(other)
@@ -149,127 +160,159 @@ class MatrizDensa < Matriz
    def <=>(other)
      max <=> other.max
    end
+
+	# Metodo para poder hacer operaciones con una matriz dispersa y densa
+	# Convertir una densa a dispersa
+	def DensaADispersa() 
+   	mDisp = Matriz_Dispersa.new(@filas, @columnas)
+   	mDisp.copia(@matriz)
+      mDisp
+   end
+   
+   def coerce(other) #other.class = Matriz_Dispersa
+      [self, other.DispersaADensa]
+   end
+
 end
 
 class MatrizDispersa < Matriz
-  def initialize(filas, columnas)
-    @filas, @columnas = filas, columnas
-    @matriz = Hash.new()
+  
+   # Constructor
+   def initialize(filas, columnas)
+     @filas, @columnas = filas, columnas
+     @matriz = Hash.new()
+   end
+
+   # Si el array pasado a la clase Matriz tiene un numero de ceros mayor que
+   # el porcentaje 60% es Dispersa por lo que entra en la clase 
+   # MatrizDispersa y se crea un hash con copia(other), en el que solo se 
+   # pondrán los valores distintos de cero.
+	def copia(other)
+   	@filas = other.length
+   	@columnas = other[0].length
+  
+    	for i in 0...other.length
+      	for j in 0...other[i].length
+      		if (other[i][j] != 0)
+            	@matriz["#{i},#{j}"] = other[i][j].to_i
+         	end
+      	end
+    	end
   end
 
-  # Si el array pasado a la clase Matriz tiene un numero de ceros mayor que
-  # el porcentaje 60% es Dispersa por lo que entra en la clase 
-  # MatrizDispersa y se crea un hash con copia(other), en el que solo se 
-  # pondrán los valores distintos de cero.
-  def copia(other)
-    @filas = other.length
-    @columnas = other[0].length
-  
-    for i in 0...other.length
-      for j in 0...other[i].length
-         if (other[i][j] != 0)
-             @matriz["#{i},#{j}"] = other[i][j].to_i
-         end
-      end
-    end
-  end
-
-	  def to_s()
-                cad = ""
-                for i in (0...@filas)
-                        for j in (0...@columnas)                                        
-                                if (@matriz.include?("#{i},#{j}"))
-                                        value = @matriz["#{i},#{j}"]
-                                        cad << "#{value} "
-                                else
-                                        cad << "0 "
-                                end                                
-                        end
-                        cad << "\n"
-                end
-                cad
-        end
-
-    def +(other)
-                sum = MatrizDispersa.new(@filas, @columnas)
-
-                for i in (0...@filas)
-                        for j in (0...@columnas)
-                                valueA = 0
-                                if (@matriz.include?("#{i},#{j}"))
-                                        valueA = @matriz["#{i},#{j}"]
-                                end
-                                
-                                valueB = 0
-                                if (other.matriz.include?("#{i},#{j}"))
-                                        valueB = other.matriz["#{i},#{j}"]
-                                end
-                                
-                                sum.matriz["#{i},#{j}"] = (valueA + valueB)
-                        end                        
-                end
-
-                sum
-        end
-        #-------------------------------------------------------------------
-        def *(other)
-                mult = MatrizDispersa.new(@filas, @columnas)        
-                
-                for i in 0...@filas
-                        for j in 0...other.columnas                        
-                        	aux = 0
-                           for k in 0...other.filas
-                                
-                                        #valueA, valueB = 0, 0
-                                        if (@matriz.include?("#{i},#{j}")) and (other.matriz.include?("#{i},#{j}"))
-                                                aux += (@matriz["#{i},#{j}"] * other.matriz["#{i},#{j}"])
-                                        else
-                                                aux += 0
-                                        end                
-                                        
-                                end #for
-                                mult.matriz["#{i},#{j}"] = aux
-                        
-                        end #for j
-
-                end #for i
-                
-                mult
-        end 
-
-       def ==(other)
-                raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDispersa
-                raise RangeError, "Las filas deben ser iguales" unless @filas == other.filas
-                raise RangeError, "Las columnas deben ser iguales" unless @columnas == other.columnas
-                iguales = true
-
-                if (@matriz != other.matriz)
-                        iguales = false
-                end
-
-                iguales
-        end
-
-	def max()
- 	  if (@matriz.include?("0,0")) #max = al primer elemento del hash
-        max = @matriz["0,0"]
-     else
-        max = 0
-     end
-  
-     for i in (0...@filas)
-        for j in (0...@columnas)
-           if ((@matriz.include?("#{i},#{j}")) && (@matriz["#{i},#{j}"] >= max))
-              max = @matriz["#{i},#{j}"]
-           end #if
-        end #for j
-     end #for i
-     max
+	# Convertir a cadena
+	def to_s()
+   	aux = ""
+     	for i in 0...@filas
+      	for j in (0...@columnas)                                        
+      	   if (@matriz.include?("#{i},#{j}"))
+      	      ele = @matriz["#{i},#{j}"]
+               aux << "#{ele} "
+            else
+            	aux << "0 "
+         	end                                
+        	end
+			aux << "\n"
+		end
+      aux
 	end
 
+
+   ################################ OPERACIONES
+   
+   # Suma de dos matrices Dispersas
+   def +(other)
+   	sumDisp = MatrizDispersa.new(@filas, @columnas)
+		for i in 0...@filas
+         for j in 0...@columnas
+            ele1 = 0
+            if (@matriz.include?("#{i},#{j}"))
+               ele1 = @matriz["#{i},#{j}"]
+            end
+            ele2 = 0
+            if (other.matriz.include?("#{i},#{j}"))
+               ele2 = other.matriz["#{i},#{j}"]
+            end
+            sumDisp.matriz["#{i},#{j}"] = (ele1 + ele2)
+        	end                        
+      end
+      sumDisp
+   end
+
+	# Resta de dos matrices Dispersas
+	def -(other)
+   	restDisp = MatrizDispersa.new(@filas, @columnas)
+      for i in 0...@filas
+      	for j in 0...@columnas
+            ele1 = 0
+            if (@matriz.include?("#{i},#{j}"))
+               ele1 = @matriz["#{i},#{j}"]
+            end
+            ele2 = 0
+				if (other.matriz.include?("#{i},#{j}"))
+               ele2 = other.matriz["#{i},#{j}"]
+            end
+            restDisp.matriz["#{i},#{j}"] = (ele1 - ele2)
+         end                        
+      end
+		restDisp
+   end
+
+	# Multiplicacion de dos matrices Dispersas
+   def *(other)
+   	multDisp = MatrizDispersa.new(@filas, @columnas)        
+   	for i in 0...@filas
+         for j in 0...other.columnas                        
+          	aux = 0
+            for k in 0...other.filas
+               ele1, ele2 = 0
+      	      if (@matriz.include?("#{i},#{j}")) and (other.matriz.include?("#{i},#{j}"))
+                  aux += (@matriz["#{i},#{j}"] * other.matriz["#{i},#{j}"])
+               else
+                  aux += 0
+            	end                
+         	end 
+       		multDisp.matriz["#{i},#{j}"] = aux
+       	end 
+
+      end 
+     	multDisp
+   end 
+
+   # Comparar dos matrices Dispersas
+	def ==(other)
+	   raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDispersa
+      raise RangeError, "Las filas deben ser iguales" unless @filas == other.filas
+	   raise RangeError, "Las columnas deben ser iguales" unless @columnas == other.columnas
+      comp = true
+      if (@matriz != other.matriz)
+         iguales = false
+      end
+		comp
+   end
+
+   # Maximo elemento de una matriz
+	def max()
+ 		if (@matriz.include?("0,0")) #max = al primer elemento del hash
+      	max = @matriz["0,0"]
+     	else
+      	max = 0
+     	end
+  
+     	for i in (0...@filas)
+      	for j in (0...@columnas)
+         	if ((@matriz.include?("#{i},#{j}")) && (@matriz["#{i},#{j}"] >= max))
+         		max = @matriz["#{i},#{j}"]
+           	end #if
+        	end #for j
+     	end #for i
+     	max
+	end
+
+	# Minimo elemento de una matriz
    def min()
    	if (@matriz.include?("0,0")) #min = al primer elemento del hash
-         min = @matriz["0,0"]
+      	min = @matriz["0,0"]
       else
          min = 0
       end
@@ -288,5 +331,35 @@ class MatrizDispersa < Matriz
    	min
 	end
 
+	# Metodo <=>
+	def <=>(other)
+      max <=> other.max
+   end
+
+
+  	# Metodos para poder sumar, multiplicar y restar una matriz dispersa y una densa, o vicervesa
+	# Convertir de una matriz Dispersa a Densa, es decir, convertir a matriz
+	
+   def DispersaDensa() 
+   	mDensa = MatrizDensa.new(@filas, @columnas)
+      m = Array.new()
+      for i in 0...@filas
+   		aux = Array.new()
+         for j in 0...@columnas
+            if (@matriz.include?("#{i},#{j}"))
+               aux << @matriz["#{i},#{j}"]
+            else
+               aux << 0
+            end 
+         end 
+         m << aux
+      end 
+      mDensa.copia(m)
+      mDensa
+   end
+   
+   def coerce(other) 
+      [self, other.DensaDispersa]
+   end
   
 end

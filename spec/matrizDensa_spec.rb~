@@ -16,12 +16,13 @@ describe MatrizDensa do
       # Resultados
       @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
       @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
+		@restDensa = matrizSuper.tipo([[1, 1], [1, 1]])
       
       
    end
 
    
-	describe "# Densa: filas y columnas de una matriz" do
+	describe "# Filas y columnas de una matriz" do
 	   it " Numero de filas " do
 	      @matriz1.filas.should eq(2)
       end
@@ -30,32 +31,32 @@ describe MatrizDensa do
       end
 	end
 
-   describe "# Densa: comparar " do
-   	it " Si son iguales " do
-      	@matriz1.should == @matrizComp
-      end
-   end
+  
+   describe "# Operaciones " do
+		it " Suma " do
+	 	   sum = @matriz1 + @matriz2
+	      sum.should == @sumDensa
+	   end
 
-   describe "# Densa: suma " do
-   	it " Dos matrices densas " do
-   	   sum = @matriz1 + @matriz2
-         sum.should == @sumDensa
-      end
-   end
-
-   describe "# Densa: maximo y minimo elemento" do
-   	it "Maximo" do
+		it " Resta " do
+			rest = @matriz2 - @matriz1
+			rest.should == @restDensa
+	
+	  	it "Maximo" do
    	   @matriz1.max.should eq(4)
       end
+
       it "Minimo" do
          @matriz1.min.should eq(1)
       end
-   end
 
-   describe "# Densa: multiplicacion " do
    	it " Dos matrices densas " do
       	mult = @matriz1 * @matriz2
          mult.should == @mulDensa
+      end
+
+		it " Si son iguales " do
+      	@matriz1.should == @matrizComp
       end
    end
 
@@ -67,5 +68,6 @@ describe MatrizDensa do
          (@matriz1 > @matriz2).should eq(false)
       end
    end
+
 
 end
