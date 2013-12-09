@@ -12,12 +12,12 @@ task :spec do
 end
 
 desc "Ejecutar las espectativas de la clase Matriz_Densa"
-task :spec_denso do
+task :spec_Mdensa do
         sh "rspec -I. spec/matrizDensa_spec.rb"
 end
 
 desc "Ejecutar las espectativas de la clase Matriz_Dispersa"
-task :spec_disperso do
+task :spec_Mdispersa do
         sh "rspec -I. spec/matrizDispersa_spec.rb"
 end
 
@@ -32,12 +32,25 @@ task :bin do
         sh "rspec -I. lib/prct09/prct09.rb"
 end
 
-
+desc "Ejecutar Rdoc"
+task :rdoc do
+        sh "rdoc"
+end
 
 desc "Run test with --format: html"
 task :thtml do
         sh "rspec -I. spec/matrizDensa_spec.rb --format html > matrizDensa_spec.html"
         sh "rspec -I. spec/matrizDispersa_spec.rb --format html > matriDispersa_spec.html"
+end
+
+desc "Run Unit testing MatrizDensa"
+task :test_denso do
+        sh "ruby test/tc_MatrizDensa.rb"
+end
+
+desc "Run Unit testing MatrizDispersa"
+task :test_disperso do
+        sh "ruby test/tc_MatrizDispersa.rb"
 end
 
 desc "install gems"

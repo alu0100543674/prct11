@@ -32,12 +32,25 @@ task :bin do
         sh "rspec -I. lib/prct09/prct09.rb"
 end
 
-
+desc "Ejecutar Rdoc"
+task :rdoc do
+        sh "rdoc"
+end
 
 desc "Run test with --format: html"
 task :thtml do
-        sh "rspec -I. spec/matrizDensa_spec.rb --format html > Matriz_Densa_spec.html"
-        sh "rspec -I. spec/matrizDispersa_spec.rb --format html > Matriz_Dispersa_spec.html"
+        sh "rspec -I. spec/matrizDensa_spec.rb --format html > matrizDensa_spec.html"
+        sh "rspec -I. spec/matrizDispersa_spec.rb --format html > matriDispersa_spec.html"
+end
+
+desc "Run Unit testing MatrizDensa"
+task :test_denso do
+        sh "ruby test/tc_MatrizDensa.rb"
+end
+
+desc "Run Unit testing MatrizDispersa"
+task :test_disperso do
+        sh "ruby test/tc_MatrizDispersa.rb"
 end
 
 desc "install gems"
