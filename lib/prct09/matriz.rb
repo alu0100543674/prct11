@@ -35,10 +35,10 @@ class Matriz
 
      if (ceros % tamanio) < 0.6
         matrizRe = MatrizDensa.new(@filas, @columnas)
-        matrizRe.copia(m)
+        matrizRe.hash_matrix(m)
      else
         matrizRe = MatrizDispersa.new(@filas, @columnas)
-        matrizRe.copia(m)
+        matrizRe.hash_matrix(m)
      end
 
      matrizRe
@@ -60,8 +60,8 @@ class MatrizDensa < Matriz
 
    # Si el array pasado a la clase Matriz tiene un numero de ceros menor 
    # que el porcentaje 60% es Densa por lo que entra en la clase
-   # MatrizDensa y se crea una matriz con copia(other).
-	def copia(other)
+   # MatrizDensa y se crea una matriz con hash_matrix(other).
+	def hash_matrix(other)
 		@filas = other.length
     	@columnas = other[0].length
   
@@ -72,6 +72,7 @@ class MatrizDensa < Matriz
     	end
   	end
 
+	# Convertir a cadenas
 	def to_s()
       aux = ""
       for i in 0...@filas
@@ -86,13 +87,13 @@ class MatrizDensa < Matriz
 	def +(other)
 		suma = MatrizDensa.new(@filas, @columnas)
 		0.upto(@filas - 1) {|i| 
-			0.upto(@columnas - 1) {|j| suma.matriz[i][j] = (@matriz[i][j] + other.matriz[i][j]) }
+			0.upto(@columnas - 1) {|j| 
+				suma.matriz[i][j] = (@matriz[i][j] + other.matriz[i][j]) 
+			}
 		}
 		suma
 	end
 
-
- 
 
 	# Resta de matrices
   	def -(other)
@@ -107,9 +108,10 @@ class MatrizDensa < Matriz
   
    # Comparar dos matrices
    def ==(other)
-		raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDensa
-      raise RangeError, "Las filas deben ser iguales" unless @filas == other.filas
-	   raise RangeError, "Las columnas deben ser iguales" unless @columnas == other.columnas
+		raise TypeError, "Solo si es Densa" unless other.is_a?MatrizDensa
+      raise RangeError, "Filas iguales" unless @filas == other.filas
+	   raise RangeError, "Columnas iguales" unless @columnas == other.columnas
+
       comp = true
       for i in 0...@filas
          for j in 0...@columnas
@@ -121,20 +123,20 @@ class MatrizDensa < Matriz
      comp
 	end
 
-	   def *(other)
-                mult = MatrizDensa.new(@filas, @columnas)
-                
-                0.upto(@filas-1) { |i|
-                        0.upto(@columnas-1) { |j|
-                                aux = 0
-                                0.upto(other.filas-1) { |k| aux += (@matriz[i][k] * other.matriz[k][j]) }
-                                mult.matriz[i][j] = aux
-                        }
-                }
-                
-                mult
-                                 
-        end
+	# Multiplicacion
+   def *(other)
+      multiplicacion = MatrizDensa.new(@filas, @columnas)
+      0.upto(@filas-1) { |i|
+      	0.upto(@columnas-1) { |j|
+            aux = 0
+            0.upto(other.filas-1) { |k| 
+					aux += (@matriz[i][k] * other.matriz[k][j]) 
+				}
+            multiplicacion.matriz[i][j] = aux
+         }
+    	}
+      multiplicacion
+	end
 
 
 
@@ -182,7 +184,7 @@ class MatrizDensa < Matriz
 	# Convertir una densa a dispersa
 	def DensaADispersa() 
    	mDisp = Matriz_Dispersa.new(@filas, @columnas)
-   	mDisp.copia(@matriz)
+   	mDisp.hash_matrix(@matriz)
       mDisp
    end
    
@@ -202,9 +204,9 @@ class MatrizDispersa < Matriz
 
    # Si el array pasado a la clase Matriz tiene un numero de ceros mayor que
    # el porcentaje 60% es Dispersa por lo que entra en la clase 
-   # MatrizDispersa y se crea un hash con copia(other), en el que solo se 
+   # MatrizDispersa y se crea un hash con hash_matrix(other), en el que solo se 
    # pondrán los valores distintos de cero.
-	def copia(other)
+	def hash_matrix(other)
    	@filas = other.length
    	@columnas = other[0].length
   
@@ -234,28 +236,50 @@ class MatrizDispersa < Matriz
       aux
 	end
 
-
-   ################################ OPERACIONES
+	# Metodos para poder sumar, multiplicar y restar una matriz dispersa y una densa, o vicervesa
+	# Convertir de una matriz Dispersa a Densa, es decir, convertir a matriz
+	
+   def DispersaDensa() 
+   	mDensa = MatrizDensa.new(@filas, @columnas)
+      m = Array.new()
+      for i in 0...@filas
+   		aux = Array.new()
+         for j in 0...@columnas
+            if (@matriz.include?("#{i},#{j}"))
+               aux << @matriz["#{i},#{j}"]
+            else
+               aux << 0
+            end 
+         end 
+         m << aux
+      end 
+      mDensa.hash_matrix(m)
+      mDensa
+   end
    
-      def +(other)
-      	sum = MatrizDispersa.new(@filas, @columnas)
-        
-         0.upto(@filas-1) { |i|
-             0.upto(@columnas-1) { |j|
-                 valueA = 0
-                 if (@matriz.include?("#{i},#{j}"))
-                    valueA = @matriz["#{i},#{j}"]
-                 end
-                    valueB = 0
-                 if (other.matriz.include?("#{i},#{j}"))
-                    valueB = other.matriz["#{i},#{j}"]
-                 end
-                                
-                 sum.matriz["#{i},#{j}"] = (valueA + valueB)
-              }
+   def coerce(other) 
+      [self, other.DensaDispersa]
+   end
+
+   ################################ OPERACIONES ##################################3
+   
+   def +(other)
+    	sum = MatrizDispersa.new(@filas, @columnas)
+   	0.upto(@filas-1) { |i|
+      	0.upto(@columnas-1) { |j|
+      		valueA = 0
+            if (@matriz.include?("#{i},#{j}"))
+         	   valueA = @matriz["#{i},#{j}"]
+            end
+            valueB = 0
+            if (other.matriz.include?("#{i},#{j}"))
+               valueB = other.matriz["#{i},#{j}"]
+            end
+            sum.matriz["#{i},#{j}"] = (valueA + valueB)
          }
-         sum
-     end
+		}
+      sum
+	end
 
 	# Resta de dos matrices Dispersas
 	def -(other)
@@ -353,29 +377,6 @@ class MatrizDispersa < Matriz
    end
 
 
-  	# Metodos para poder sumar, multiplicar y restar una matriz dispersa y una densa, o vicervesa
-	# Convertir de una matriz Dispersa a Densa, es decir, convertir a matriz
-	
-   def DispersaDensa() 
-   	mDensa = MatrizDensa.new(@filas, @columnas)
-      m = Array.new()
-      for i in 0...@filas
-   		aux = Array.new()
-         for j in 0...@columnas
-            if (@matriz.include?("#{i},#{j}"))
-               aux << @matriz["#{i},#{j}"]
-            else
-               aux << 0
-            end 
-         end 
-         m << aux
-      end 
-      mDensa.copia(m)
-      mDensa
-   end
-   
-   def coerce(other) 
-      [self, other.DensaDispersa]
-   end
+ 
   
 end

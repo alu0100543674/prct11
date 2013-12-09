@@ -4,9 +4,9 @@ require 'test/unit'
 class Test_MatrizDensa < Test::Unit::TestCase
   
   def setup
-    matrizSuper = Matriz.new()
-    @matriz1 = matrizSuper.tipo([[1, 2], [3, 4]])
-    @matriz2 = matrizSuper.tipo([[2, 3], [7, 1]])
+    Matrix = Matriz.new()
+    @matriz1 = Matrix.tipo([[1, 2], [3, 4]])
+    @matriz2 = Matrix.tipo([[2, 3], [7, 1]])
   end
 
 	def test_initialize
@@ -15,8 +15,8 @@ class Test_MatrizDensa < Test::Unit::TestCase
   end
 
 	 def test_clase
-    assert_equal("Matriz_Densa", @matriz1.class.to_s)
-    assert_equal("Matriz_Densa", @matriz2.class.to_s)
+    assert_equal("MatrizDensa", @matriz1.class.to_s)
+    assert_equal("MatrizDensa", @matriz2.class.to_s)
   end
   
   def test_sum

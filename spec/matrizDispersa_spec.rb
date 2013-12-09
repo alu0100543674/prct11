@@ -2,23 +2,23 @@ require "./lib/prct09/matriz.rb"
 
 describe MatrizDispersa do
 	before :each do
-		# Creamos una matriz llamada matrizSuper de tipo Matriz.
-      matrizSuper = Matriz.new();
+		# Creamos una matriz llamada matrix de tipo Matriz.
+      matrix = Matriz.new();
       
       # MATRICES ENTERAS
       # Dispersas
-      @matriz3 = matrizSuper.tipo([[1, 0], [0, 0]])
-      @matriz4 = matrizSuper.tipo([[4, 0], [0, 0]])
- 		@matriz5 = matrizSuper.tipo([[3, 0], [0, 0]])
-		@matrizDen = matrizSuper.tipo([[1, 0], [1, 1]])
-		@matrizDisp = matrizSuper.tipo([[1, 0], [0, 0]])
+      @matriz3 = matrix.tipo([[1, 0], [0, 0]])
+      @matriz4 = matrix.tipo([[4, 0], [0, 0]])
+ 		@matriz5 = matrix.tipo([[3, 0], [0, 0]])
+		@matrizDen = matrix.tipo([[1, 0], [1, 1]])
+		@matrizDisp = matrix.tipo([[1, 0], [0, 0]])
       
 
       # Resultados
-      @sumDispersa = matrizSuper.tipo([[3, 0], [0, 0]])
-		#@multDispersa = matrizSuper.tipo([[4, 0], [0, 0]])
-      @matrizComp = matrizSuper.tipo([[1, 0], [0, 0]])
-		@sumDispersaDensa = matrizSuper.tipo([[2, 0], [1, 1]])
+      @sumDispersa = matrix.tipo([[3, 0], [0, 0]])
+		#@multDispersa = matrix.tipo([[4, 0], [0, 0]])
+      @matrizComp = matrix.tipo([[1, 0], [0, 0]])
+		@sumDispersaDensa = matrix.tipo([[2, 0], [1, 1]])
 		
       
    end

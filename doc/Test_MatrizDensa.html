@@ -67,13 +67,13 @@
           
           <li><a href="#method-i-setup">#setup</a></li>
           
-          <li><a href="#method-i-test_clase">#test_clase</a></li>
+          <li><a href="#method-i-test_class">#test_class</a></li>
           
-          <li><a href="#method-i-test_initialize">#test_initialize</a></li>
+          <li><a href="#method-i-test_init">#test_init</a></li>
           
-          <li><a href="#method-i-test_mult">#test_mult</a></li>
+          <li><a href="#method-i-test_multiplicacion">#test_multiplicacion</a></li>
           
-          <li><a href="#method-i-test_sum">#test_sum</a></li>
+          <li><a href="#method-i-test_suma">#test_suma</a></li>
           
         </ul>
       </div>
@@ -162,6 +162,19 @@
       
 
       
+      <!-- Constants -->
+      <div id="constants-list" class="section">
+        <h3 class="section-header">Constants</h3>
+        <dl>
+        
+          <dt><a name="Matrix">Matrix</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+        </dl>
+      </div>
+      
 
       
 
@@ -192,9 +205,9 @@
 <pre>
 <span class="ruby-comment"># File test/tc_MatrizDensa.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
-  <span class="ruby-identifier">matrizSuper</span> = <span class="ruby-constant">Matriz</span>.<span class="ruby-identifier">new</span>()
-  <span class="ruby-ivar">@matriz1</span> = <span class="ruby-identifier">matrizSuper</span>.<span class="ruby-identifier">tipo</span>([[<span class="ruby-value">1</span>, <span class="ruby-value">2</span>], [<span class="ruby-value">3</span>, <span class="ruby-value">4</span>]])
-  <span class="ruby-ivar">@matriz2</span> = <span class="ruby-identifier">matrizSuper</span>.<span class="ruby-identifier">tipo</span>([[<span class="ruby-value">2</span>, <span class="ruby-value">3</span>], [<span class="ruby-value">7</span>, <span class="ruby-value">1</span>]])
+  <span class="ruby-constant">Matrix</span> = <span class="ruby-constant">Matriz</span>.<span class="ruby-identifier">new</span>()
+  <span class="ruby-ivar">@matriz1</span> = <span class="ruby-constant">Matrix</span>.<span class="ruby-identifier">tipo</span>([[<span class="ruby-value">1</span>, <span class="ruby-value">2</span>], [<span class="ruby-value">3</span>, <span class="ruby-value">4</span>]])
+  <span class="ruby-ivar">@matriz2</span> = <span class="ruby-constant">Matrix</span>.<span class="ruby-identifier">tipo</span>([[<span class="ruby-value">2</span>, <span class="ruby-value">3</span>], [<span class="ruby-value">7</span>, <span class="ruby-value">1</span>]])
 <span class="ruby-keyword">end</span></pre>
             </div><!-- setup-source -->
             
@@ -206,12 +219,12 @@
         </div><!-- setup-method -->
 
       
-        <div id="test_clase-method" class="method-detail ">
-          <a name="method-i-test_clase"></a>
+        <div id="test_class-method" class="method-detail ">
+          <a name="method-i-test_class"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">test_clase</span><span
+            <span class="method-name">test_class</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -223,29 +236,29 @@
             
 
             
-            <div class="method-source-code" id="test_clase-source">
+            <div class="method-source-code" id="test_class-source">
 <pre>
 <span class="ruby-comment"># File test/tc_MatrizDensa.rb, line 17</span>
-       <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_clase</span>
+       <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_class</span>
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;MatrizDensa&quot;</span>, <span class="ruby-ivar">@matriz1</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>)
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;MatrizDensa&quot;</span>, <span class="ruby-ivar">@matriz2</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- test_clase-source -->
+            </div><!-- test_class-source -->
             
           </div>
 
           
 
           
-        </div><!-- test_clase-method -->
+        </div><!-- test_class-method -->
 
       
-        <div id="test_initialize-method" class="method-detail ">
-          <a name="method-i-test_initialize"></a>
+        <div id="test_init-method" class="method-detail ">
+          <a name="method-i-test_init"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">test_initialize</span><span
+            <span class="method-name">test_init</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -257,29 +270,29 @@
             
 
             
-            <div class="method-source-code" id="test_initialize-source">
+            <div class="method-source-code" id="test_init-source">
 <pre>
 <span class="ruby-comment"># File test/tc_MatrizDensa.rb, line 12</span>
-      <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_initialize</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_init</span>
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;1 2 \n3 4 \n&quot;</span>, <span class="ruby-ivar">@matriz1</span>.<span class="ruby-identifier">to_s</span>)
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;2 3 \n7 1 \n&quot;</span>, <span class="ruby-ivar">@matriz2</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- test_initialize-source -->
+            </div><!-- test_init-source -->
             
           </div>
 
           
 
           
-        </div><!-- test_initialize-method -->
+        </div><!-- test_init-method -->
 
       
-        <div id="test_mult-method" class="method-detail ">
-          <a name="method-i-test_mult"></a>
+        <div id="test_multiplicacion-method" class="method-detail ">
+          <a name="method-i-test_multiplicacion"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">test_mult</span><span
+            <span class="method-name">test_multiplicacion</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -291,29 +304,29 @@
             
 
             
-            <div class="method-source-code" id="test_mult-source">
+            <div class="method-source-code" id="test_multiplicacion-source">
 <pre>
 <span class="ruby-comment"># File test/tc_MatrizDensa.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_mult</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_multiplicacion</span>
   <span class="ruby-identifier">m_mult</span> = <span class="ruby-ivar">@matriz1</span> * <span class="ruby-ivar">@matriz2</span>
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;16 5 \n34 13 \n&quot;</span>, <span class="ruby-identifier">m_mult</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- test_mult-source -->
+            </div><!-- test_multiplicacion-source -->
             
           </div>
 
           
 
           
-        </div><!-- test_mult-method -->
+        </div><!-- test_multiplicacion-method -->
 
       
-        <div id="test_sum-method" class="method-detail ">
-          <a name="method-i-test_sum"></a>
+        <div id="test_suma-method" class="method-detail ">
+          <a name="method-i-test_suma"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">test_sum</span><span
+            <span class="method-name">test_suma</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -325,21 +338,21 @@
             
 
             
-            <div class="method-source-code" id="test_sum-source">
+            <div class="method-source-code" id="test_suma-source">
 <pre>
 <span class="ruby-comment"># File test/tc_MatrizDensa.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_sum</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_suma</span>
   <span class="ruby-identifier">m_sum</span> = <span class="ruby-ivar">@matriz1</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@matriz2</span>
   <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&quot;3 5 \n10 5 \n&quot;</span>, <span class="ruby-identifier">m_sum</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- test_sum-source -->
+            </div><!-- test_suma-source -->
             
           </div>
 
           
 
           
-        </div><!-- test_sum-method -->
+        </div><!-- test_suma-method -->
 
       
       </div><!-- public-instance-method-details -->

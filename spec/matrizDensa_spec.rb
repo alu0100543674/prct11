@@ -3,16 +3,16 @@ require "./lib/prct09/fracciones.rb"
 
 describe MatrizDensa do
 	before :each do
-		# Creamos una matriz llamada matrizSuper de tipo Matriz.
-      matrizSuper = Matriz.new();
+		# Creamos una matriz llamada matrix de tipo Matriz.
+      matrix = Matriz.new();
       
       # MATRICES ENTERAS
       # Densas
-      @matriz1 = matrizSuper.tipo([[1, 2], [3, 4]])
-      @matriz2 = matrizSuper.tipo([[2, 3], [4, 5]])
-      @matrizComp = matrizSuper.tipo([[1, 2], [3, 4]])
-		@matrizDen = matrizSuper.tipo([[1, 0], [1, 1]])
-		@matrizDisp = matrizSuper.tipo([[1, 0], [0, 0]])
+      @matriz1 = matrix.tipo([[1, 2], [3, 4]])
+      @matriz2 = matrix.tipo([[2, 3], [4, 5]])
+      @matrizComp = matrix.tipo([[1, 2], [3, 4]])
+		@matrizDen = matrix.tipo([[1, 0], [1, 1]])
+		@matrizDisp = matrix.tipo([[1, 0], [0, 0]])
 		
 		# FRACCIONES
 		@numFrac = [[Fraccion.new(1, 2), Fraccion.new(0, 1)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
@@ -20,17 +20,17 @@ describe MatrizDensa do
       @numFra2 = [[Fraccion.new(1, 2), Fraccion.new(1, 2)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
 
 		# MATRICES FRACCION
-		@matFra1 = matrizSuper.tipo([[1, 1], [1, 1]])
-      @matFra2 = matrizSuper.tipo(@numFrac)
+		@matFra1 = matrix.tipo([[1, 1], [1, 1]])
+      @matFra2 = matrix.tipo(@numFrac)
     
 
       # Resultados
-      @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
-      @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
-		@restDensa = matrizSuper.tipo([[1, 1], [1, 1]])
-		@sumDensaDispersa = matrizSuper.tipo([[2, 0], [1, 1]])
-		@sumFrac = matrizSuper.tipo(@numFra1)
-      @multFrac = matrizSuper.tipo(@numFra2)
+      @sumDensa = matrix.tipo([[3, 5], [7, 9]])
+      @mulDensa = matrix.tipo([[10, 13], [22, 29]])
+		@restDensa = matrix.tipo([[1, 1], [1, 1]])
+		@sumDensaDispersa = matrix.tipo([[2, 0], [1, 1]])
+		@sumFrac = matrix.tipo(@numFra1)
+      @multFrac = matrix.tipo(@numFra2)
       
    end
 

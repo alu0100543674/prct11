@@ -314,10 +314,10 @@ Densa, en caso contrario será Dispersa.</p>
 
    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">ceros</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">tamanio</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-value">0.6</span>
       <span class="ruby-identifier">matrizRe</span> = <span class="ruby-constant">MatrizDensa</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@filas</span>, <span class="ruby-ivar">@columnas</span>)
-      <span class="ruby-identifier">matrizRe</span>.<span class="ruby-identifier">copia</span>(<span class="ruby-identifier">m</span>)
+      <span class="ruby-identifier">matrizRe</span>.<span class="ruby-identifier">hash_matrix</span>(<span class="ruby-identifier">m</span>)
    <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">matrizRe</span> = <span class="ruby-constant">MatrizDispersa</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@filas</span>, <span class="ruby-ivar">@columnas</span>)
-      <span class="ruby-identifier">matrizRe</span>.<span class="ruby-identifier">copia</span>(<span class="ruby-identifier">m</span>)
+      <span class="ruby-identifier">matrizRe</span>.<span class="ruby-identifier">hash_matrix</span>(<span class="ruby-identifier">m</span>)
    <span class="ruby-keyword">end</span>
 
    <span class="ruby-identifier">matrizRe</span>
