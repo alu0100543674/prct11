@@ -1,7 +1,7 @@
 require "./lib/prct09/matriz.rb"
 require 'test/unit'
 
-class Test_Matriz_Dispersa < Test::Unit::TestCase
+class Test_MatrizDispersa < Test::Unit::TestCase
 
 	def setup	
 		matrizSuper = Matriz.new()
@@ -25,7 +25,7 @@ class Test_Matriz_Dispersa < Test::Unit::TestCase
   	end
   
   	def test_mult
-   	m_mult = @mat_C * @mat_D
+   	m_mult = @matriz3 * @matriz4
     	assert_equal("8 0 \n0 0 \n", m_mult.to_s)
   end
 end

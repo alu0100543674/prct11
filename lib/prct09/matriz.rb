@@ -71,6 +71,17 @@ class MatrizDensa < Matriz
     end
   end
 
+	def to_s()
+      aux = ""
+      for i in 0...@filas
+         for j in 0...@columnas
+            aux << "#{@matriz[i][j]} "
+         end
+         aux << "\n"
+      end
+      aux
+   end
+
   # Suma de matrices
   def +(other)
     suma = MatrizDensa.new(@filas, @columnas)

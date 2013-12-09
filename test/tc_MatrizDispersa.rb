@@ -1,7 +1,7 @@
 require "./lib/prct09/matriz.rb"
 require 'test/unit'
 
-class Test_Matriz_Dispersa < Test::Unit::TestCase
+class Test_MatrizDispersa < Test::Unit::TestCase
 
 	def setup	
 		matrizSuper = Matriz.new()

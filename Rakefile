@@ -8,7 +8,7 @@ task :default => :spec
 desc "Ejecutar todas las espectativas"
 task :spec do
         sh "rspec -I. spec/matrizDispersa_spec.rb"
-        sh "rspec -I. spec/matrizDe_spec.rb"
+        sh "rspec -I. spec/matrizDensa_spec.rb"
 end
 
 desc "Ejecutar las espectativas de la clase Matriz_Densa"

@@ -12,12 +12,12 @@ task :spec do
 end
 
 desc "Ejecutar las espectativas de la clase Matriz_Densa"
-task :spec_denso do
+task :spec_Mdensa do
         sh "rspec -I. spec/matrizDensa_spec.rb"
 end
 
 desc "Ejecutar las espectativas de la clase Matriz_Dispersa"
-task :spec_disperso do
+task :spec_Mdispersa do
         sh "rspec -I. spec/matrizDispersa_spec.rb"
 end
 

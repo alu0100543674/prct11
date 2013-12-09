@@ -71,6 +71,17 @@ class MatrizDensa < Matriz
     end
   end
 
+	def to_s()
+      aux = ""
+      for i in 0...@filas
+         for j in 0...@columnas)
+            aux << "#{@matriz[i][j]} "
+         end
+         aux << "\n"
+      end
+      aux
+   end
+
   # Suma de matrices
   def +(other)
     suma = MatrizDensa.new(@filas, @columnas)
@@ -95,7 +106,7 @@ class MatrizDensa < Matriz
   
    # Comparar dos matrices
    def ==(other)
-		raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDispersa
+		raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDensa
       raise RangeError, "Las filas deben ser iguales" unless @filas == other.filas
 	   raise RangeError, "Las columnas deben ser iguales" unless @columnas == other.columnas
       comp = true
