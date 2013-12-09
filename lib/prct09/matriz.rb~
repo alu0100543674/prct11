@@ -95,16 +95,19 @@ class MatrizDensa < Matriz
   
    # Comparar dos matrices
    def ==(other)
-     iguales = true
-     for i in 0...@filas
-       for j in 0...@columnas
-         if (@matriz[i][j] != other.matriz[i][j])
-            iguales = false
+		raise TypeError, "Solo se pueden comparar matrices" unless other.is_a?MatrizDispersa
+      raise RangeError, "Las filas deben ser iguales" unless @filas == other.filas
+	   raise RangeError, "Las columnas deben ser iguales" unless @columnas == other.columnas
+      comp = true
+      for i in 0...@filas
+         for j in 0...@columnas
+            if (@matriz[i][j] != other.matriz[i][j])
+               comp = false
+            end
          end
-       end
-     end
-     iguales
-    end
+      end
+     comp
+	end
 
    # Multiplicacion de dos matrices
    def *(other)
@@ -164,9 +167,9 @@ class MatrizDensa < Matriz
 	# Metodo para poder hacer operaciones con una matriz dispersa y densa
 	# Convertir una densa a dispersa
 	def DensaADispersa() 
-   	mat_disp = Matriz_Dispersa.new(@filas, @columnas)
-   	mat_disp.copia(@matriz)
-      mat_disp
+   	mDisp = Matriz_Dispersa.new(@filas, @columnas)
+   	mDisp.copia(@matriz)
+      mDisp
    end
    
    def coerce(other) #other.class = Matriz_Dispersa
