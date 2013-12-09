@@ -49,27 +49,28 @@ class Matriz
 end
 
 class MatrizDensa < Matriz
-  def initialize(filas, columnas)
-    @filas, @columnas = filas, columnas
-    @matriz = Array.new{Array.new()}
-    for i in 0...@filas
-       @matriz[i] = Array.new()
-    end
-  end
-
-  # Si el array pasado a la clase Matriz tiene un numero de ceros menor que
-  # el porcentaje 60% es Densa por lo que entra en la clase MatrizDensa y 
-  # se crea una matriz con copia(other).
-  def copia(other)
-    @filas = other.length
-    @columnas = other[0].length
-  
-    for i in 0...other.length
-      for j in 0...other[i].length
-         @matriz[i][j] = other[i][j]
+  	
+	def initialize(filas, columnas)
+      @filas, @columnas = filas, columnas
+      @matriz = Array.new{Array.new()}
+      for i in 0...@filas
+         @matriz[i] = Array.new()
       end
-    end
-  end
+   end
+
+   # Si el array pasado a la clase Matriz tiene un numero de ceros menor 
+   # que el porcentaje 60% es Densa por lo que entra en la clase
+   # MatrizDensa y se crea una matriz con copia(other).
+	def copia(other)
+		@filas = other.length
+    	@columnas = other[0].length
+  
+    	for i in 0...other.length
+      	for j in 0...other[i].length
+      	   @matriz[i][j] = other[i][j]
+      	end
+    	end
+  	end
 
 	def to_s()
       aux = ""
@@ -82,16 +83,16 @@ class MatrizDensa < Matriz
       aux
    end
 
-  # Suma de matrices
-  def +(other)
-    suma = MatrizDensa.new(@filas, @columnas)
-    for i in 0...@filas
-       for j in 0...@columnas
-          suma.matriz[i][j] = (@matriz[i][j] + other.matriz[i][j])
-       end
-     end
-     suma
-   end
+	def +(other)
+		suma = MatrizDensa.new(@filas, @columnas)
+		0.upto(@filas - 1) {|i| 
+			0.upto(@columnas - 1) {|j| suma.matriz[i][j] = (@matriz[i][j] + other.matriz[i][j]) }
+		}
+		suma
+	end
+
+
+ 
 
 	# Resta de matrices
   	def -(other)
@@ -120,20 +121,22 @@ class MatrizDensa < Matriz
      comp
 	end
 
-   # Multiplicacion de dos matrices
-   def *(other)
-     multiplicacion = MatrizDensa.new(@filas, @columnas)
-     for i in 0...@filas
-       for j in 0...@columnas
-          aux = 0
-          for k in 0...other.filas
-            aux += (@matriz[i][k] * other.matriz[k][j]) 
-          end
-          multiplicacion.matriz[i][j] = aux
-       end
-     end
-     multiplicacion
-   end
+	   def *(other)
+                mult = MatrizDensa.new(@filas, @columnas)
+                
+                0.upto(@filas-1) { |i|
+                        0.upto(@columnas-1) { |j|
+                                aux = 0
+                                0.upto(other.filas-1) { |k| aux += (@matriz[i][k] * other.matriz[k][j]) }
+                                mult.matriz[i][j] = aux
+                        }
+                }
+                
+                mult
+                                 
+        end
+
+
 
    # Metodos para calcular el elemento maximo y minimo de una matriz
 
@@ -234,24 +237,25 @@ class MatrizDispersa < Matriz
 
    ################################ OPERACIONES
    
-   # Suma de dos matrices Dispersas
-   def +(other)
-   	sumDisp = MatrizDispersa.new(@filas, @columnas)
-		for i in 0...@filas
-         for j in 0...@columnas
-            ele1 = 0
-            if (@matriz.include?("#{i},#{j}"))
-               ele1 = @matriz["#{i},#{j}"]
-            end
-            ele2 = 0
-            if (other.matriz.include?("#{i},#{j}"))
-               ele2 = other.matriz["#{i},#{j}"]
-            end
-            sumDisp.matriz["#{i},#{j}"] = (ele1 + ele2)
-        	end                        
-      end
-      sumDisp
-   end
+      def +(other)
+      	sum = MatrizDispersa.new(@filas, @columnas)
+        
+         0.upto(@filas-1) { |i|
+             0.upto(@columnas-1) { |j|
+                 valueA = 0
+                 if (@matriz.include?("#{i},#{j}"))
+                    valueA = @matriz["#{i},#{j}"]
+                 end
+                    valueB = 0
+                 if (other.matriz.include?("#{i},#{j}"))
+                    valueB = other.matriz["#{i},#{j}"]
+                 end
+                                
+                 sum.matriz["#{i},#{j}"] = (valueA + valueB)
+              }
+         }
+         sum
+     end
 
 	# Resta de dos matrices Dispersas
 	def -(other)
@@ -272,26 +276,24 @@ class MatrizDispersa < Matriz
 		restDisp
    end
 
-	# Multiplicacion de dos matrices Dispersas
-   def *(other)
-   	multDisp = MatrizDispersa.new(@filas, @columnas)        
-   	for i in 0...@filas
-         for j in 0...other.columnas                        
-          	aux = 0
-            for k in 0...other.filas
-               ele1, ele2 = 0
-      	      if (@matriz.include?("#{i},#{j}")) and (other.matriz.include?("#{i},#{j}"))
-                  aux += (@matriz["#{i},#{j}"] * other.matriz["#{i},#{j}"])
-               else
-                  aux += 0
-            	end                
-         	end 
-       		multDisp.matriz["#{i},#{j}"] = aux
-       	end 
-
-      end 
-     	multDisp
-   end 
+	def *(other)
+      mult = MatrizDispersa.new(@filas, @columnas)
+      0.upto(@filas-1) { |i|
+         0.upto(@columnas-1) { |j|
+            aux = 0
+            0.upto(other.filas-1) { |k|
+                valueA, valueB = 0, 0
+                if (@matriz.include?("#{i},#{j}")) and (other.matriz.include?("#{i},#{j}"))
+                   aux += (@matriz["#{i},#{j}"] * other.matriz["#{i},#{j}"])
+                 else
+                    aux += 0
+                 end        
+             }
+             mult.matriz["#{i},#{j}"] = aux
+			}
+      }
+      mult                           
+   end
 
    # Comparar dos matrices Dispersas
 	def ==(other)

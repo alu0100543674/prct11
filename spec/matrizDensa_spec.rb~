@@ -68,7 +68,7 @@ describe MatrizDensa do
       end
 
 		it " Multiplicacion con fracciones " do
-			multFr = @matFra1 + @matFra2
+			multFr = @matFra1 * @matFra2
 			multFr.should == @multFrac
 		end
 
