@@ -1,4 +1,5 @@
 require "./lib/prct09/matriz.rb"
+require "./lib/prct09/fracciones.rb"
 
 describe MatrizDensa do
 	before :each do
@@ -12,14 +13,24 @@ describe MatrizDensa do
       @matrizComp = matrizSuper.tipo([[1, 2], [3, 4]])
 		@matrizDen = matrizSuper.tipo([[1, 0], [1, 1]])
 		@matrizDisp = matrizSuper.tipo([[1, 0], [0, 0]])
-     
+		
+		# FRACCIONES
+		@numFrac = [[Fraccion.new(1, 2), Fraccion.new(0, 1)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
+      @numFra1 = [[Fraccion.new(3, 2), Fraccion.new(1, 1)], [Fraccion.new(1, 1), Fraccion.new(1, 1)]]
+      @numFra2 = [[Fraccion.new(1, 2), Fraccion.new(1, 2)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
+
+		# MATRICES FRACCION
+		@matFra1 = matrizSuper.tipo([[1, 1], [1, 1]])
+      @matFra2 = matrizSuper.tipo(@numFrac)
+    
 
       # Resultados
       @sumDensa = matrizSuper.tipo([[3, 5], [7, 9]])
       @mulDensa = matrizSuper.tipo([[10, 13], [22, 29]])
 		@restDensa = matrizSuper.tipo([[1, 1], [1, 1]])
 		@sumDensaDispersa = matrizSuper.tipo([[2, 0], [1, 1]])
-      
+		@sumFrac = matrizSuper.tipo(@numFra1)
+      @multFrac = matrizSuper.tipo(@numFra2)
       
    end
 
@@ -31,9 +42,15 @@ describe MatrizDensa do
       it " Numero de columnas " do
          @matriz1.columnas.should eq(2)
       end
+		it "Debe existir un numero de filas para mat_D (Fracciones)" do
+         @matFra1.filas.should eq(2)
+      end
+      it "Debe existir un numero de columnas para mat_C (1,1,1,1)" do
+         @matFra1.columnas.should eq(2)
+      end
 	end
 
-  
+	 
    describe "# Operaciones " do
 		it " Suma " do
 	 	   sum = @matriz1 + @matriz2
@@ -43,6 +60,16 @@ describe MatrizDensa do
 		it " Suma de una matriz densa y una dispersa " do
          sum = @matrizDen + @matrizDisp
 			sum.should == @sumDensaDispersa 
+		end
+
+		it " Suma con fracciones " do
+			sumFr = @matFra1 + @matFra2
+			sumFr.should == @sumFrac
+      end
+
+		it " Multiplicacion con fracciones " do
+			multFr = @matFra1 * @matFra2
+			multFr.should == @multFrac
 		end
 
 		it " Resta " do

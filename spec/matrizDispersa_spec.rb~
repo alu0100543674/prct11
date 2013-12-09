@@ -43,7 +43,7 @@ describe MatrizDispersa do
 
 		it " Suma de una matriz dispersa y una densa " do
          sum = @matrizDen + @matrizDisp
-			sum.should == @sumDensaDispersa 
+			sum.should == @sumDispersaDensa
 		end		
 	
 		it " Resta " do
