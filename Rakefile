@@ -32,7 +32,7 @@ task :bin do
         sh "rspec -I. lib/prct09/prct09.rb"
 end
 
-desc "Ejecutar Rdoc"
+desc "Rdoc"
 task :rdoc do
         sh "rdoc"
 end
